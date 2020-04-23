@@ -10,6 +10,7 @@ buildscript {
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
+    id("com.github.johnrengelman.shadow") version "5.2.0"
     application
     idea
 }
@@ -55,5 +56,8 @@ tasks {
         useJUnitPlatform {
             includeEngines("spek2")
         }
+    }
+    shadowJar {
+        mergeServiceFiles()
     }
 }

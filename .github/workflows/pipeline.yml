@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build, test and verify
-      run: ./gradlew check
+      run: ./gradlew build
     - uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
