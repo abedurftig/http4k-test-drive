@@ -1,9 +1,12 @@
-.gradle
-
-# Ignore IntelliJ files
+# Ignore IntelliJ files/folders
 *.iml
 *.ipr
 *.iws
+.idea
 
-# Ignore Gradle build output directory
+# Ignore Gradle build specific files/directories
 build
+.gradle
+
+# Ignore OS specific files
+**/.DS_Store

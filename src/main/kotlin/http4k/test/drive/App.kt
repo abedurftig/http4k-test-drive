@@ -6,7 +6,7 @@ package http4k.test.drive
 class App {
     val greeting: String
         get() {
-            return "Hello world."
+            return "Hello World!"
         }
 }
 
