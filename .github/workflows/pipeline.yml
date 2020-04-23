@@ -14,7 +14,6 @@ jobs:
     - name: Build, test and verify
       run: ./gradlew check
     - uses: actions/cache@v1
-    - name: Caching
       with:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
