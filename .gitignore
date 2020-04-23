@@ -1,4 +1,9 @@
 .gradle
 
+# Ignore IntelliJ files
+*.iml
+*.ipr
+*.iws
+
 # Ignore Gradle build output directory
 build
