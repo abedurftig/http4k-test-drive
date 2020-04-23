@@ -16,8 +16,6 @@ jobs:
       with:
         java-version: '11.0.5'
         architecture: x64
-    - name: Build, test and verify
-      run: ./gradlew build & ls --all .
     - name: Cache
       uses: actions/cache@v1
       with:
@@ -25,3 +23,5 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+    - name: Build, test and verify
+      run: ./gradlew build
