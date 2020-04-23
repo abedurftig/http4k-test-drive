@@ -26,7 +26,7 @@ class App {
         Response(OK).body("The answer is $answer")
     }
 
-    private fun greetingEndpoint(): HttpHandler = { _ ->
+    fun greetingEndpoint(): HttpHandler = { _ ->
         Response(OK).body(greeting)
     }
 

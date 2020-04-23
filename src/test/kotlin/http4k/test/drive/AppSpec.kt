@@ -20,7 +20,7 @@ object AppSpec : Spek({
     }
 
     group("Functional tests") {
-        test("The endpoint works without starting the server") {
+        test("The math endpoint works without starting the server") {
 
             val unit = app.mathsEndpoint { first, second -> first + second }
             val response = unit(Request(Method.GET, "/")
@@ -29,6 +29,14 @@ object AppSpec : Spek({
 
             assertThat(response.status).isEqualTo(OK)
             assertThat(response.body.toString()).isEqualTo("The answer is 9")
+        }
+        test("The greeting endpoint works without starting the server") {
+
+            val unit = app.greetingEndpoint()
+            val response = unit(Request(Method.GET, "/"))
+
+            assertThat(response.status).isEqualTo(OK)
+            assertThat(response.body.toString()).isEqualTo("Hello World!")
         }
     }
 
@@ -39,7 +47,7 @@ object AppSpec : Spek({
     group("Integration tests") {
 
         val client = OkHttp()
-        test("The endpoint works with starting the server") {
+        test("The math endpoint works with starting the server") {
 
             val clientResponse = client(Request(Method.GET, "http://localhost:8080/add")
                 .query("first", "123")
