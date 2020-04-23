@@ -3,11 +3,39 @@
  */
 package http4k.test.drive
 
+import org.http4k.core.HttpHandler
+import org.http4k.core.Method
+import org.http4k.core.Response
+import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Uri
+import org.http4k.core.then
+import org.http4k.filter.ClientFilters
+import org.http4k.filter.ServerFilters
+import org.http4k.routing.bind
+import org.http4k.routing.routes
+import org.http4k.server.Http4kServer
+import org.http4k.server.Jetty
+import org.http4k.server.asServer
+
 class App {
     val greeting: String
         get() {
             return "Hello World!"
         }
+
+    fun mathsEndpoint(fn: (Int, Int) -> Int): HttpHandler = { req ->
+        val answer = fn(req.query("first")!!.toInt(), req.query("second")!!.toInt())
+        Response(OK).body("The answer is $answer")
+    }
+
+    private fun mathsApp() =
+        ServerFilters.CatchAll().then(routes(
+            "/add" bind Method.GET to mathsEndpoint { first, second -> first + second }
+        ))
+
+    fun createMathServer(port: Int): Http4kServer {
+        return mathsApp().asServer(Jetty(port))
+    }
 }
 
 fun main(args: Array<String>) {
